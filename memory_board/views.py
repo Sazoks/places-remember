@@ -37,7 +37,6 @@ class CreateAndListMemoriesView(LoginRequiredMixin,
         context = {
             'memories': self.get_queryset(),
         }
-
         return super().get_context_data(**context, **kwargs)
 
     def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
