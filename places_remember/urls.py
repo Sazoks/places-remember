@@ -27,6 +27,9 @@ from django.conf.urls.static import (
 admin.autodiscover()
 
 urlpatterns = [
+    path('memory_board/', include('memory_board.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 ]
 
