@@ -16,7 +16,8 @@ class Memory(models.Model):
         blank=True,
         null=True,
     )
-    address = models.TextField(
+    address = models.CharField(
+        max_length=1024,
         verbose_name=_('Адрес места'),
     )
     user = models.ForeignKey(

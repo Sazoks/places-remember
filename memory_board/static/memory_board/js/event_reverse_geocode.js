@@ -59,7 +59,7 @@ function init() {
                 });
             
             // Записываем значение в скрытое поле формы для отправки на сервер.
-            document.getElementById('address-line').value = firstGeoObject.getAddressLine();
+            document.getElementById('id_address').value = firstGeoObject.getAddressLine();
         });
     }
 }

@@ -1,8 +1,8 @@
 from django.urls import  path
 
-from .views import MemoryBoardView
+from . import views
 
 app_name = 'memory_board'
 urlpatterns = [
-    path('', MemoryBoardView.as_view(), name='my_memories'),
+    path('', views.CreateAndListMemoriesView.as_view(), name='list_or_create'),
 ]

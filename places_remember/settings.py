@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'memory_board:my_memories'
+LOGIN_REDIRECT_URL = 'memory_board:list_or_create'
 
 # Настройка бэкендов аутентификации через соц. сети.
 AUTHENTICATION_BACKENDS = [
@@ -139,7 +139,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'accounts.pipeline.get_avatar',  # Для сохранения автара в Profile.
+    # 'accounts.pipeline.get_profile_image',  # Для сохранения автара в Profile.
 ]
 
 # Internationalization
