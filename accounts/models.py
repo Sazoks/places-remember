@@ -6,11 +6,10 @@ from django.utils.translation import gettext_lazy as _
 class Profile(models.Model):
     """Модель профиля для расширения модели User"""
 
-    avatar = models.ImageField(
-        upload_to='user_avatars',
-        verbose_name=_('Аватар пользователя'),
+    avatar = models.URLField(
         null=True,
         blank=True,
+        verbose_name=_('Ссылка на аватар'),
     )
     user = models.OneToOneField(
         to=User,

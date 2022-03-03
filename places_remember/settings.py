@@ -139,7 +139,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    # 'accounts.pipeline.get_profile_image',  # Для сохранения автара в Profile.
+    'accounts.pipeline.get_profile_image',  # Для сохранения автара в Profile.
 ]
 
 # Internationalization
