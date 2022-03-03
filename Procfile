@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn date_me_please.wsgi
+web: gunicorn places_remember.wsgi

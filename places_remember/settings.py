@@ -169,4 +169,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Необходимо для деплоя на heroku.
-django_heroku.settings(locals())
+if not os.environ.get('CI', False):
+    django_heroku.settings(locals())
