@@ -22,11 +22,14 @@ from django.conf.urls.static import (
     static,
     settings,
 )
+from django.views.generic.base import RedirectView
 
 
 admin.autodiscover()
 
 urlpatterns = [
+    path('', RedirectView.as_view(pattern_name='memory_board:list_or_create',
+                                  permanent=True)),
     path('memory-board/', include('memory_board.urls')),
     path('accounts/', include('accounts.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),

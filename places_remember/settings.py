@@ -114,7 +114,6 @@ LOGIN_REDIRECT_URL = 'memory_board:list_or_create'
 # Настройка бэкендов аутентификации через соц. сети.
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -122,11 +121,6 @@ AUTHENTICATION_BACKENDS = [
 SOCIAL_AUTH_VK_OAUTH2_KEY = int(os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY'))
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
-# Настройки для подключения к серверу аутентификации Facebook.
-# FIXME: Настроить приложение на facebook.
-SOCIAL_AUTH_FACEBOOK_KEY = 'XXXXXXXXX'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'XXXXXXXXX'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Пайплайны при работе с соц. сетями.
 SOCIAL_AUTH_PIPELINE = [
@@ -139,7 +133,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'accounts.pipeline.get_profile_image',  # Для сохранения автара в Profile.
+    'accounts.pipeline.get_profile_image',  # Для сохранения аватара в Profile.
 ]
 
 # Internationalization
