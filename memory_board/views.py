@@ -42,6 +42,7 @@ class CreateAndListMemoriesView(LoginRequiredMixin,
     def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """Метод добавления нового воспоминания"""
 
+        self.object_list = self.get_queryset()
         form = self.get_form()
 
         if form.is_valid():

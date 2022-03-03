@@ -1,13 +1,8 @@
-import wget
-import logging
-import requests
-from django.core.files.base import ContentFile
-from places_remember.settings import BASE_DIR
-
 from .models import Profile
 
 
-def get_profile_image(backend, user, response, is_new=False, *args, **kwargs):
+def get_profile_image(backend, user, response, is_new=False,
+                      *args, **kwargs):
     """
     Функция для получения аватара профиля пользователя.
 
