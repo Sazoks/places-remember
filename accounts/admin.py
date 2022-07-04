@@ -1,9 +1,22 @@
 from django.contrib import admin
+from django.contrib.auth import admin as auth_admin
+from django.utils.translation import gettext_lazy as _
 
-from . import models
+from .models import User
 
 
-@admin.register(models.Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', )
-    list_display_links = ('user', )
+@admin.register(User)
+class UserAdmin(auth_admin.UserAdmin):
+    """Класс для работы с моделью User через админку"""
+
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {
+            'fields': ('first_name', 'last_name', 'email', 'avatar')
+        }),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups',
+                       'user_permissions'),
+        }),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )

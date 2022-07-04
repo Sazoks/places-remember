@@ -1,8 +1,7 @@
-from .models import Profile
+from django.contrib.auth import get_user_model
 
 
-def get_profile_image(backend, user, response, is_new=False,
-                      *args, **kwargs):
+def get_profile_image(backend, user, response, is_new=False, *args, **kwargs):
     """
     Функция для получения аватара профиля пользователя.
 
@@ -14,6 +13,8 @@ def get_profile_image(backend, user, response, is_new=False,
     :param kwargs: Именованные параметры запроса.
     """
 
+    UserModel = get_user_model()
+
     if user is None:
         return
 
@@ -23,6 +24,5 @@ def get_profile_image(backend, user, response, is_new=False,
         avatar_url = response['photo']
 
     if avatar_url and is_new:
-        print(avatar_url)
-        new_profile = Profile(avatar=avatar_url, user=user)
+        new_profile = UserModel(avatar=avatar_url)
         new_profile.save()

@@ -121,6 +121,9 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+# Укажем свой класс для модели юзера.
+AUTH_USER_MODEL = 'accounts.User'
+
 # Настройки для подключения к серверу аутентификации VK.
 SOCIAL_AUTH_VK_OAUTH2_KEY = config('SOCIAL_AUTH_VK_OAUTH2_KEY', cast=int)
 SOCIAL_AUTH_VK_OAUTH2_SECRET = config('SOCIAL_AUTH_VK_OAUTH2_SECRET')
