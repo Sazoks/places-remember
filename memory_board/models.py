@@ -1,5 +1,6 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 
@@ -21,7 +22,7 @@ class Memory(models.Model):
         verbose_name=_('Адрес места'),
     )
     user = models.ForeignKey(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='memories',
         related_query_name='memory',
@@ -35,4 +36,6 @@ class Memory(models.Model):
         verbose_name_plural = _('Воспоминания')
 
     def __str__(self) -> str:
+        """Читаемое представление объекта"""
+
         return str(self.title)

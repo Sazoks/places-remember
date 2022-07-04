@@ -113,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Куда перенаправлять после успешного входа.
 LOGIN_REDIRECT_URL = 'memory_board:list_or_create'
 
 # Бэкенды аутентификации в системе.
@@ -120,6 +121,9 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+# Укажем свой класс для модели юзера.
+AUTH_USER_MODEL = 'accounts.User'
 
 # Настройки для подключения к серверу аутентификации VK.
 SOCIAL_AUTH_VK_OAUTH2_KEY = config('SOCIAL_AUTH_VK_OAUTH2_KEY', cast=int)

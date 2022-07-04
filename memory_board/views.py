@@ -16,9 +16,11 @@ from django.db.models import QuerySet
 from .forms import MemoryForm
 
 
-class CreateAndListMemoriesView(LoginRequiredMixin,
-                                ModelFormMixin,
-                                ListView):
+class CreateAndListMemoriesView(
+    LoginRequiredMixin,
+    ModelFormMixin,
+    ListView,
+):
     """
     Класс-контроллер для вывода списка воспоминаний пользователя
     и сохранения нового воспоминания через форму.
@@ -37,11 +39,14 @@ class CreateAndListMemoriesView(LoginRequiredMixin,
         context = {
             'memories': self.get_queryset(),
         }
+
         return super().get_context_data(**context, **kwargs)
 
     def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         """Метод добавления нового воспоминания"""
 
+        # При отправке ответа на POST-запрос все равно нужно добавить в
+        # контекст шаблона список воспоминаний.
         self.object_list = self.get_queryset()
         form = self.get_form()
 
