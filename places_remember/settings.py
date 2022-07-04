@@ -12,23 +12,21 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 import django_heroku
-from dotenv import load_dotenv
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Installed apps.
     'social_django',
+
+    # My apps.
     'accounts',
     'memory_board',
 ]
@@ -70,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # social_django.
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -111,15 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = 'memory_board:list_or_create'
 
-# Настройка бэкендов аутентификации через соц. сети.
+# Бэкенды аутентификации в системе.
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Настройки для подключения к серверу аутентификации VK.
-SOCIAL_AUTH_VK_OAUTH2_KEY = int(os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY'))
-SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_KEY = config('SOCIAL_AUTH_VK_OAUTH2_KEY', cast=int)
+SOCIAL_AUTH_VK_OAUTH2_SECRET = config('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
 
 # Пайплайны при работе с соц. сетями.
@@ -169,5 +173,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Необходимо для деплоя на heroku.
-if not os.environ.get('CI', False):
+if config('HEROKU_DEPLOY', default=False, cast=bool):
     django_heroku.settings(locals())
